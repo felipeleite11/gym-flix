@@ -1,0 +1,1 @@
+type ActiveScreen = 'explore' | 'workout_detail' | 'progress' | 'add_workout' | 'overview_table' | 'photo_gallery';
