@@ -28,7 +28,7 @@ export function Toast({ message, isOpen, onClose }: ToastProps) {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 30, scale: 0.95 }}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-9999 w-[calc(100%-32px)] max-w-sm bg-[#000000] text-[#FFFFFF] px-4 py-3 rounded-lg flex items-center gap-3 shadow-xl"
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-9999 w-[calc(100%-32px)] max-w-sm bg-[#000000] text-[#FFFFFF] px-4 py-3 rounded-lg flex items-center gap-3 shadow-xl"
         >
           <div className="bg-white/20 p-1.5 rounded-full">
             <Check className="w-4 h-4 text-white" />
