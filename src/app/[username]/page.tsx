@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   Trophy,
   ArrowLeft,
-  Flame
+  Flame,
+  LoaderIcon
 } from 'lucide-react';
 import { useUser } from '@/hooks/use-user';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -18,7 +19,7 @@ import { ExerciseModal } from '../../components/ExerciseModal';
 import { Toast } from '../../components/Toast';
 import { useParams } from 'next/navigation';
 
-export default function Home() {
+export default function Dashboard() {
 	const { username } = useParams()
 
 	const { data: user } = useUser({ username: String(username) })
@@ -111,7 +112,12 @@ export default function Home() {
 	};
 
 	if(!user) {
-		return null
+		return (
+			<div className="flex flex-col gap-4 items-center text-slate-400 justify-center h-screen">
+				<LoaderIcon className="animate-spin" size={40} />
+				<span>Aguarde...</span>
+			</div>
+		)
 	}
 
 	const workoutHistoryLast30Days = workoutHistory?.filter((w: any) => isAfter(new Date(w.date), subDays(new Date(), 30))) || []
