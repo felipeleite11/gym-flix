@@ -69,6 +69,45 @@ export const baserow = {
 			}
 		},
 
+		async findUserByUsername(username: string) {
+			try {
+				let user: any = {}
+
+				const { data } = await baserowClient.get(`rows/table/${tables.users}/`)
+				const users = data.results
+
+				user = users.find((u: any) => u.username === username)
+				user.gender = user.gender.value as Gender
+				delete user.order
+
+				let { data: { results: workouts } } = await baserowClient.get(`rows/table/${tables.workouts}/`)
+				const { data: { results: exercises } } = await baserowClient.get(`rows/table/${tables.exercises}/`)
+				
+				workouts = workouts.map((w: any) => {
+					delete w.order
+
+					w.exercises = exercises.filter((e: any) => e.workouts.some((wk: any) => wk.id === w.id))
+						.map((e: any) => ({
+							...e,
+							focus: e.focus.map((f: any) => f.value)
+						}))
+					
+					return {
+						...w,
+						user: w.user[0]
+					}
+				})
+
+				const userWorkouts = workouts.filter((w: any) => w.user.value === username)
+
+				user.workouts = userWorkouts
+
+				return user
+			} catch(e) {
+				return null
+			}
+		},
+
 		async findExercisesByWorkout(id: number) {
 			try {
 				const { data: workout } = await baserowClient.get(`rows/table/${tables.workouts}/${id}/`)
@@ -104,19 +143,24 @@ export const baserow = {
 
 		async findHistoryItems(userId: number) {
 			try {
-				let { data: history } = await baserowClient.get(`rows/table/${tables.history}/`)
+				let { data: history } = await baserowClient.get(`rows/table/${tables.history}/?order_by=-date`)
 				let { data: workouts } = await baserowClient.get(`rows/table/${tables.workouts}/`)
 				workouts = workouts.results
 
 				history = history.results.filter((i: any) => i.user[0].id === userId)
+				
+				history = history.map((h: any) => {
+					const wkt = workouts.find((w: any) => w.id === h.workout[0].id)
 
-				history.map((h: any) => ({
-					id: h.id,
-					date: h.date,
-					workout: workouts.find((w: any) => w.id === h.workout.id)
-				}))
-
-				console.log('history', history)
+					return {
+						id: h.id,
+						date: h.date,
+						workout: {
+							id: wkt.id,
+							name: wkt.name
+						}
+					}
+				})
 
 				return history
 			} catch(e) {

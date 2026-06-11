@@ -7,19 +7,21 @@ import {
   ArrowLeft,
   Flame
 } from 'lucide-react';
-
-import { AppHeader } from '../components/AppHeader';
-import { RightDrawer } from '../components/RightDrawer';
-import { ExerciseItem } from '../components/ExerciseItem';
-import { ExerciseModal } from '../components/ExerciseModal';
-import { Toast } from '../components/Toast';
 import { useUser } from '@/hooks/use-user';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { baserow } from '@/lib/baserow';
 import { format, isAfter, subDays } from 'date-fns';
+import { AppHeader } from '../../components/AppHeader';
+import { RightDrawer } from '../../components/RightDrawer';
+import { ExerciseItem } from '../../components/ExerciseItem';
+import { ExerciseModal } from '../../components/ExerciseModal';
+import { Toast } from '../../components/Toast';
+import { useParams } from 'next/navigation';
 
 export default function Home() {
-	const { data: user } = useUser({ username: 'we' })
+	const { username } = useParams()
+
+	const { data: user } = useUser({ username: String(username) })
 
 	const [workouts, setWorkouts] = useState<Workout[]>(() => {
 		return user?.workouts || []

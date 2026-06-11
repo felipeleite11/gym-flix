@@ -1,11 +1,15 @@
 import { baserow } from '@/lib/baserow'
 import { useQuery } from '@tanstack/react-query'
 
-export function useUser() {
+interface UseUserProps {
+	username: string
+}
+
+export function useUser({ username }: UseUserProps) {
 	return useQuery({
-		queryKey: ['get-customers'],
+		queryKey: ['get-user'],
 		queryFn: async () => {
-			const user = await baserow.helpers.findUserById(1)
+			const user = await baserow.helpers.findUserByUsername(username)
 
 			return user
 		},
