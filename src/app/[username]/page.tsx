@@ -154,8 +154,8 @@ export default function Dashboard() {
 										</h1>
 									</div>
 									{workoutHistory && (
-										<div className="bg-[#ccff00]/10 text-[#ccff00] px-3 py-1 rounded-full text-[11px] font-sans font-bold flex items-center gap-1 border border-[#ccff00]/20">
-											<Flame className="w-4 h-4 text-[#ccff00] fill-[#ccff00] animate-pulse" />
+										<div className="bg-neon-lime/10 text-neon-lime px-3 py-1 rounded-full text-[11px] font-sans font-bold flex items-center gap-1 border border-neon-lime/20">
+											<Flame className="w-4 h-4 text-neon-lime fill-neon-lime animate-pulse" />
 											<span>{workoutHistory.length} treino(s) concluído(s)</span>
 										</div>
 									)}
@@ -186,9 +186,9 @@ export default function Dashboard() {
 									</h2>
 
 									<div className="grid grid-cols-1 gap-4">
-										{user.workouts.map((wk) => {
-											const exerciseIds = wk.exercises.map((e) => e.id);
-											const doneTodayCount = exerciseIds.filter((id) =>
+										{user.workouts.map((wk: any) => {
+											const exerciseIds = wk.exercises.map((e: any) => e.id);
+											const doneTodayCount = exerciseIds.filter((id: number) =>
 												completedExercises.includes(id)
 											).length;
 
@@ -197,11 +197,11 @@ export default function Dashboard() {
 													<button
 														id={`workout-card-btn-${wk.id}`}
 														onClick={() => handleSelectWorkout(wk.id)}
-														className="w-full text-left bg-[#121815] rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-[#ccff00]/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all"
+														className="w-full text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all"
 													>
 														<div className="p-4 w-full">
 															<div className="flex items-center justify-between mb-2">
-																<span className="text-[10px] font-sans font-bold tracking-wide text-[#ccff00] bg-[#ccff00]/10 px-2 py-0.5 rounded-full inline-block border border-[#ccff00]/20">
+																<span className="text-[10px] font-sans font-bold tracking-wide text-neon-lime bg-[#ccff00]/10 px-2 py-0.5 rounded-full inline-block border border-neon-lime/20">
 																	{wk.exercises.length} EXERCÍCIOS
 																</span>
 																{/* <span className="text-[11px] text-white/50 font-sans font-normal">
@@ -225,9 +225,9 @@ export default function Dashboard() {
 															)} */}
 														</div>
 														<div className="px-4 py-2.5 bg-white/[0.01] border-t border-white/5 flex items-center justify-between w-full">
-															<span className="text-[11px] font-sans font-medium text-[#ccff00]">Visualizar treino →</span>
+															<span className="text-[11px] font-sans font-medium text-neon-lime">Visualizar treino →</span>
 															{doneTodayCount === wk.exercises.length && wk.exercises.length > 0 ? (
-																<span className="text-[11px] font-sans font-bold text-[#ccff00]">✓ Concluído</span>
+																<span className="text-[11px] font-sans font-bold text-neon-lime">✓ Concluído</span>
 															) : null}
 														</div>
 													</button>
@@ -258,7 +258,7 @@ export default function Dashboard() {
 								</button>
 
 								{activeWorkout && (
-									<div className="bg-[#121815] rounded-[20px] p-5 border border-white/5 relative overflow-hidden">
+									<div className="bg-card-bg rounded-[20px] p-5 border border-white/5 relative overflow-hidden">
 										<span className="text-[10px] uppercase font-sans font-bold tracking-wider text-white/40">Ficha Ativa</span>
 										{/* Screen Title: font 21px bold */}
 										<h1 className="text-[21px] font-sans font-bold text-white mt-1 mb-1.5 leading-tight">
