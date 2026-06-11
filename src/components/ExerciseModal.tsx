@@ -171,7 +171,7 @@ export function ExerciseModal({
                   </motion.div>
                   <span className="text-[14px] font-sans font-bold">Excelente trabalho!</span>
                   <p className="text-[11px] font-sans text-white/70 leading-[150%] max-w-[200px]">
-                    {hasNext ? 'Próximo exercício em instantes...' : 'Treino completo! Retornando...'}
+                    {hasNext ? 'Passe para o próximo exercício.' : 'Treino completo! Retornando...'}
                   </p>
                 </motion.div>
               ) : (
