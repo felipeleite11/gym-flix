@@ -201,7 +201,7 @@ export default function Dashboard() {
 													>
 														<div className="p-4 w-full">
 															<div className="flex items-center justify-between mb-2">
-																<span className="text-[10px] font-sans font-bold tracking-wide text-neon-lime bg-[#ccff00]/10 px-2 py-0.5 rounded-full inline-block border border-neon-lime/20">
+																<span className="text-[10px] font-sans font-bold tracking-wide text-neon-lime bg-neon-lime/10 px-2 py-0.5 rounded-full inline-block border border-neon-lime/20">
 																	{wk.exercises.length} EXERCÍCIOS
 																</span>
 																{/* <span className="text-[11px] text-white/50 font-sans font-normal">
@@ -224,7 +224,7 @@ export default function Dashboard() {
 																</div>
 															)} */}
 														</div>
-														<div className="px-4 py-2.5 bg-white/[0.01] border-t border-white/5 flex items-center justify-between w-full">
+														<div className="px-4 py-2.5 bg-white/1 border-t border-white/5 flex items-center justify-between w-full">
 															<span className="text-[11px] font-sans font-medium text-neon-lime">Visualizar treino →</span>
 															{doneTodayCount === wk.exercises.length && wk.exercises.length > 0 ? (
 																<span className="text-[11px] font-sans font-bold text-neon-lime">✓ Concluído</span>
@@ -296,10 +296,10 @@ export default function Dashboard() {
 									<motion.div
 										initial={{ scale: 0.95, opacity: 0 }}
 										animate={{ scale: 1, opacity: 1 }}
-										className="p-5 bg-[#ccff00]/10 border border-[#ccff00]/30 rounded-2xl text-white text-center space-y-2 mt-4 shadow-md"
+										className="p-5 bg-neon-lime/10 border border-neon-lime/30 rounded-2xl text-white text-center space-y-2 mt-4 shadow-md"
 									>
-										<Trophy className="w-8 h-8 mx-auto text-[#ccff00]" />
-										<h3 className="font-sans font-bold text-[16px] text-[#ccff00]">Treino completo!</h3>
+										<Trophy className="w-8 h-8 mx-auto text-neon-lime" />
+										<h3 className="font-sans font-bold text-[16px] text-neon-lime">Treino completo!</h3>
 										<p className="text-[11px] text-zinc-300 font-sans leading-[150%]">
 											Você deu o seu máximo no treino {activeWorkout.name}. Hidrate-se e descanse a musculatura.
 										</p>
@@ -363,16 +363,16 @@ export default function Dashboard() {
 								</div>
 
 								<div className="grid grid-cols-[2fr_3fr] gap-3">
-									<div className="bg-[#121815] p-4 rounded-xl border border-white/5 flex flex-col gap-2">
+									<div className="bg-card-bg p-4 rounded-xl border border-white/5 flex flex-col gap-2">
 										<span className="text-[8px] text-white/40 uppercase font-medium">Treinos feitos</span>
-										<span className="text-[21px] font-sans font-bold text-[#ccff00]">{workoutHistoryLast30Days.length}</span>
+										<span className="text-[21px] font-sans font-bold text-neon-lime">{workoutHistoryLast30Days.length}</span>
 										<span className="text-[10px] font-sans text-white/50">Nos últimos 30 dias</span>
 									</div>
 
-									<div className="bg-[#121815] p-4 rounded-xl border border-white/5 flex flex-col gap-2">
+									<div className="bg-card-bg p-4 rounded-xl border border-white/5 flex flex-col gap-2">
 										<span className="text-[8px] text-white/40 uppercase font-medium">Frequência Semanal</span>
 										{workoutHistoryLast7Days && (
-											<span className="text-[21px] font-sans font-bold text-[#ccff00]">
+											<span className="text-[21px] font-sans font-bold text-neon-lime">
 												{workoutHistoryLast7Days.length > 4 ? 'Elevada 🔥' : workoutHistoryLast7Days.length > 2 ? 'Firme 🤙' : 'Baixa'}
 											</span>
 										)}
@@ -387,7 +387,7 @@ export default function Dashboard() {
 
 									<div className="space-y-2 overflow-y-auto max-h-96">
 										{workoutHistory.length === 0 ? (
-											<div className="text-center py-8 bg-[#121815] rounded-xl border border-white/5">
+											<div className="text-center py-8 bg-card-bg rounded-xl border border-white/5">
 												<span className="text-[11px] text-white/40 font-normal font-sans">Nenhum treino concluído nos últimos 30 dias. Escolha um e comece!</span>
 											</div>
 										) : (
@@ -401,12 +401,12 @@ export default function Dashboard() {
 													{
 														(showCompleteWorkoutHistoryList ? workoutHistory : truncatedWorkoutHistoryList).map((w: any) => {
 															return (
-																<li key={w.id} className="p-3 bg-[#121815] border border-[#ccff00]/20 rounded-xl flex items-center justify-between">
+																<li key={w.id} className="p-3 bg-card-bg border border-neon-lime/20 rounded-xl flex items-center justify-between">
 																	<div className="flex flex-col min-w-0">
-																		<span className="text-[8px] text-[#ccff00] uppercase font-sans font-semibold mb-0.5">{format(new Date(w.date), 'dd/MM/yyyy HH:mm')}</span>
+																		<span className="text-[8px] text-neon-lime uppercase font-sans font-semibold mb-0.5">{format(new Date(w.date), 'dd/MM/yyyy HH:mm')}</span>
 																		<span className="text-[11px] font-bold text-white truncate">{w.workout.name}</span>
 																	</div>
-																	<span className="text-[10px] font-sans text-[#ccff00] font-bold bg-[#ccff00]/10 px-2 py-0.5 border border-[#ccff00]/20 rounded-full shrink-0 flex items-center gap-1">
+																	<span className="text-[10px] font-sans text-neon-lime font-bold bg-neon-lime/10 px-2 py-0.5 border border-neon-lime/20 rounded-full shrink-0 flex items-center gap-1">
 																		Concluído
 																	</span>
 																</li>
@@ -435,7 +435,7 @@ export default function Dashboard() {
 								<div className="pt-4 border-t border-white/5 flex flex-col gap-2 shrink-0">
 									<button
 										onClick={() => setActiveScreen('explore')}
-										className="w-full bg-[#000000] text-[#FFFFFF] border border-white/10 hover:bg-zinc-900 px-4 py-[10px] rounded-[10px] font-sans font-bold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer"
+										className="w-full bg-[#000000] text-[#FFFFFF] border border-white/10 hover:bg-zinc-900 px-4 py-2.5 rounded-[10px] font-sans font-bold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer"
 									>
 										Voltar para treinos
 									</button>
@@ -464,14 +464,14 @@ export default function Dashboard() {
 								</p>
 
 								<div className="flex-1 overflow-x-auto">
-									<div className="min-w-[325px] bg-[#FBFBFB] text-[#000000] border border-stone-800 rounded-[10px] overflow-hidden">
+									<div className="min-w-81.25 bg-[#FBFBFB] text-[#000000] border border-stone-800 rounded-[10px] overflow-hidden">
 										<table className="w-full border-collapse bg-stone-900">
 											<thead>
 												<tr className="bg-black/5 border-b border-stone-700">
-													<th className="p-[6px] text-[13px] font-semibold text-center font-sans text-white">Grupo(s)</th>
-													<th className="p-[6px] text-[13px] font-semibold text-center font-sans text-white">Exercício</th>
-													<th className="p-[6px] text-[13px] font-semibold text-center font-sans text-white">Meta</th>
-													<th className="p-[6px] text-[13px] font-semibold text-center font-sans text-white">Treino</th>
+													<th className="p-1.5 text-[13px] font-semibold text-center font-sans text-white">Grupo(s)</th>
+													<th className="p-1.5 text-[13px] font-semibold text-center font-sans text-white">Exercício</th>
+													<th className="p-1.5 text-[13px] font-semibold text-center font-sans text-white">Meta</th>
+													<th className="p-1.5 text-[13px] font-semibold text-center font-sans text-white">Treino</th>
 												</tr>
 											</thead>
 											{/* body rows: font 11px, regular, alignment center */}
@@ -482,16 +482,16 @@ export default function Dashboard() {
 															key={`${wk.id}-${ex.id}-${i}`}
 															className="border-b border-stone-600 last:border-b-0 hover:bg-black/5 transition-colors text-white"
 														>
-															<td className="p-[6px] text-[11px] font-normal text-center font-sans text-white/80">
+															<td className="p-1.5 text-[11px] font-normal text-center font-sans text-white/80">
 																{ex.focus.join(', ')}
 															</td>
-															<td className="p-[6px] text-[11px] font-bold text-center font-sans">
+															<td className="p-1.5 text-[11px] font-bold text-center font-sans">
 																{ex.name}
 															</td>
-															<td className="p-[6px] text-[11px] font-normal text-center font-sans text-white/80">
+															<td className="p-1.5 text-[11px] font-normal text-center font-sans text-white/80">
 																{ex.goal}
 															</td>
-															<td className="p-[6px] text-[11px] font-semibold text-center font-sans text-emerald-500">
+															<td className="p-1.5 text-[11px] font-semibold text-center font-sans text-emerald-500">
 																{wk.name.split(' - ')[0]}
 															</td>
 														</tr>
@@ -499,7 +499,7 @@ export default function Dashboard() {
 												)}
 												{workouts.reduce((acc, curr) => acc + curr.exercises.length, 0) === 0 && (
 													<tr>
-														<td colSpan={4} className="p-[12px] text-center text-black/40 font-sans text-[11px]">
+														<td colSpan={4} className="p-3 text-center text-black/40 font-sans text-[11px]">
 															Nenhum exercício para mostrar na tabela.
 														</td>
 													</tr>
@@ -512,7 +512,7 @@ export default function Dashboard() {
 								<div className="shrink-0 pt-4">
 									<button
 										onClick={() => setActiveScreen('explore')}
-										className="w-full bg-[#000000] text-[#FFFFFF] text-[16px] font-sans font-bold py-[10px] px-4 rounded-[10px] border border-white/10 flex items-center justify-center hover:bg-zinc-900 active:scale-[0.98] transition-all cursor-pointer text-xs"
+										className="w-full bg-[#000000] text-[#FFFFFF] text-[16px] font-sans font-bold py-2.5 px-4 rounded-[10px] border border-white/10 flex items-center justify-center hover:bg-zinc-900 active:scale-[0.98] transition-all cursor-pointer text-xs"
 									>
 										Voltar para Início
 									</button>
