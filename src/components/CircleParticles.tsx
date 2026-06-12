@@ -1,6 +1,8 @@
 'use client'
 
-import Particles from "@tsparticles/react";
+import Particles from "@tsparticles/react"
+
+// https://particles.js.org/playground/shapes
 
 export function CircleParticles({ id } : { id: string }) {
 	return (

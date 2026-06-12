@@ -29,15 +29,12 @@ export default function Dashboard() {
 		return user?.workouts || []
 	})
 
-	const [completedExercises, setCompletedExercises] = useState<number[]>([])
-
+	const [completeExercises, setCompleteExercises] = useState<number[]>([])
 	const [activeScreen, setActiveScreen] = useState<ActiveScreen>('explore');
 	const [selectedWorkoutId, setSelectedWorkoutId] = useState<number | null>(null);
 	const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(0);
 	const [isExercisePlayerOpen, setIsExercisePlayerOpen] = useState(false);
-
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
 	const [toastMessage, setToastMessage] = useState('');
 	const [isToastOpen, setIsToastOpen] = useState(false);
 
@@ -89,9 +86,9 @@ export default function Dashboard() {
 	})
 
 	const handleMarkCompleted = (exerciseId: number) => {
-		if (!completedExercises.includes(exerciseId)) {
-			const updated = [...completedExercises, exerciseId];
-			setCompletedExercises(updated);
+		if (!completeExercises.includes(exerciseId)) {
+			const updated = [...completeExercises, exerciseId];
+			setCompleteExercises(updated);
 			showSystemToast('Exercício finalizado com sucesso! 💪');
 
 			if(activeWorkout?.exercises.length === updated.length) {
@@ -138,7 +135,8 @@ export default function Dashboard() {
 
 				<main className="flex-1 overflow-y-auto px-4 py-5 flex flex-col">
 					<AnimatePresence mode="wait">
-						{/* Screen 1: GALERIA DE TREINOS */}
+
+						{/* Screen 1: TREINOS */}
 						{activeScreen === 'explore' && (
 							<motion.section
 								key="screen-explore"
@@ -162,24 +160,9 @@ export default function Dashboard() {
 									)}
 								</div>
 
-								<p className="text-[11px] text-zinc-300 font-sans leading-[150%]">
-									Escolha seu treino abaixo para iniciar. Acompanhe a execução perfeita de cada exercício assistindo aos vídeos e registre seu progresso diário.
+								<p className="text-sm text-zinc-300 font-sans leading-[150%]">
+									Escolha seu treino abaixo para iniciar
 								</p>
-
-								{/* <div className="bg-[#121815] p-4 rounded-[15px] border border-white/5 flex justify-between items-center">
-									<div className="flex flex-col gap-[6px]">
-										<span className="text-[8px] text-white/40 uppercase">Exercícios Concluídos</span>
-										<span className="text-[14px] font-sans font-bold text-[#ccff00] flex items-center gap-1">
-											{completedExercises.length} exercícios 🏆
-										</span>
-									</div>
-									<div className="flex flex-col gap-[6px] items-end">
-										<span className="text-[8px] text-white/40 uppercase">Status do Dia</span>
-										<span className="text-[11px] font-sans text-[#ccff00] font-semibold uppercase">
-											{completedExercises.length > 0 ? 'Em Andamento' : 'Pendente'}
-										</span>
-									</div>
-								</div> */}
 
 								<div className="pt-2">
 									<h2 className="text-[15px] font-sans font-bold text-white mb-3 uppercase">
@@ -190,13 +173,12 @@ export default function Dashboard() {
 										{user.workouts.map((wk: any) => {
 											const exerciseIds = wk.exercises.map((e: any) => e.id)
 											const doneTodayCount = exerciseIds.filter((id: number) =>
-												completedExercises.includes(id)
+												completeExercises.includes(id)
 											).length
 
 											return (
 												<div key={wk.id} className="relative">
 													<button
-														id={`workout-card-btn-${wk.id}`}
 														onClick={() => handleSelectWorkout(wk.id)}
 														className="w-full h-44 text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all"
 													>
@@ -256,40 +238,17 @@ export default function Dashboard() {
 
 								{activeWorkout && (
 									<div className="bg-card-bg rounded-[20px] p-5 border border-white/5 relative overflow-hidden">
-										<span className="text-[10px] uppercase font-sans font-bold tracking-wider text-white/40">Ficha Ativa</span>
-										{/* Screen Title: font 21px bold */}
+										<span className="text-[10px] uppercase font-sans font-bold tracking-wider text-white/40">Treino</span>
 										<h1 className="text-[21px] font-sans font-bold text-white mt-1 mb-1.5 leading-tight">
 											{activeWorkout.name}
 										</h1>
-										<p className="text-[11px] text-zinc-300 font-sans leading-[150%] mb-3">
+										<p className="text-sm text-zinc-300 font-sans leading-[150%] mb-3">
 											{activeWorkout.description}
 										</p>
-
-										{/* Progress details bento structure (Field data format) */}
-										{/* <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/5">
-											<div className="flex flex-col gap-1.5">
-												<span className="text-[8px] text-white/40 uppercase">EXERCÍCIOS</span>
-												<span className="text-[11px] text-white font-semibold">
-													{activeWorkout.exercises.length} metas
-												</span>
-											</div>
-											<div className="flex flex-col gap-1.5">
-												<span className="text-[8px] text-white/40 uppercase">ESTADO DIÁRIO</span>
-												<span className="text-[11px] text-[#ccff00] font-semibold">
-													{activeWorkout.exercises.filter(ex => completedExercises.includes(ex.id)).length} de {activeWorkout.exercises.length}
-												</span>
-											</div>
-											<div className="flex flex-col gap-1.5">
-												<span className="text-[8px] text-white/40 uppercase">FOCO RECRUTADO</span>
-												<span className="text-[11px] text-white font-semibold">
-													{activeWorkout.exercises[0]?.category || 'Geral'}
-												</span>
-											</div>
-										</div> */}
 									</div>
 								)}
 
-								{activeWorkout && activeWorkout.exercises.length > 0 && activeWorkout.exercises.every(ex => completedExercises.includes(ex.id)) && (
+								{activeWorkout && activeWorkout.exercises.length > 0 && activeWorkout.exercises.every(ex => completeExercises.includes(ex.id)) && (
 									<motion.div
 										initial={{ scale: 0.95, opacity: 0 }}
 										animate={{ scale: 1, opacity: 1 }}
@@ -310,7 +269,7 @@ export default function Dashboard() {
 
 									<div className="flex flex-col gap-3">
 										{activeWorkout?.exercises.map((exercise, index) => {
-											const isCompleted = completedExercises.includes(exercise.id);
+											const isCompleted = completeExercises.includes(exercise.id);
 
 											return (
 												<ExerciseItem
@@ -320,23 +279,8 @@ export default function Dashboard() {
 													index={index}
 													onSelect={() => handleSelectExercise(index)}
 												/>
-											);
+											)
 										})}
-
-										{/* {activeWorkout?.exercises.length === 0 && (
-											<div className="text-center py-10 bg-[#121815] rounded-xl border border-dashed border-white/10">
-												<span className="text-[11px] font-sans text-white/40 block mb-3">Nenhum exercício cadastrado nesta ficha.</span>
-												<button
-													onClick={() => {
-														setFormWorkoutId(selectedWorkoutId || 'treino-a');
-														setActiveScreen('add_workout');
-													}}
-													className="bg-[#000000] text-[#FFFFFF] text-[13px] px-3 py-1.5 rounded-lg inline-flex items-center gap-1.5 border border-white/5 hover:bg-zinc-900 cursor-pointer"
-												>
-													<Plus className="w-4 h-4 text-white" /> Adicionar Exercício
-												</button>
-											</div>
-										)} */}
 									</div>
 								</div>
 							</motion.section>
@@ -536,7 +480,7 @@ export default function Dashboard() {
 						exercise={activeExercise}
 						currentIndex={currentExerciseIndex}
 						totalCount={activeWorkout.exercises.length}
-						isCompleted={completedExercises.includes(activeExercise.id)}
+						isCompleted={completeExercises.includes(activeExercise.id)}
 						hasNext={currentExerciseIndex < activeWorkout.exercises.length - 1}
 						hasPrev={currentExerciseIndex > 0}
 						onNext={handleNextExercise}
