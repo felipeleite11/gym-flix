@@ -134,7 +134,8 @@ export const baserow = {
 			try {
 				await baserowClient.post(`rows/table/${tables.history}/`, {
 					user: userId,
-					workout: workoutId
+					workout: workoutId,
+					date: new Date()
 				})
 			} catch(e) {
 				console.error('Ocorreu um erro.')
