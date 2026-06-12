@@ -91,10 +91,6 @@ export default function Dashboard() {
 			qc.invalidateQueries({
 				queryKey: ['get-workout-history']
 			})
-
-			setTimeout(() => {
-				setActiveScreen('explore')
-			}, 1500)
 		}
 	})
 
@@ -103,8 +99,6 @@ export default function Dashboard() {
 			const updated = [...completeExercises, exerciseId]
 			setCompleteExercises(updated)
 			
-			showSystemToast('Exercício finalizado com sucesso! 💪')
-
 			if(activeWorkout?.exercises.length === updated.length) {
 				registerOnHistory(activeWorkout)
 			}
@@ -161,14 +155,14 @@ export default function Dashboard() {
 							>
 								<div className="flex items-end justify-between">
 									<div className="space-y-0.5">
-										<span className="text-[10px] uppercase tracking-wide text-white/50 font-sans font-medium">Musculação</span>
+										<span className="text-[11px] uppercase tracking-wide text-white/50 font-sans font-medium">Musculação</span>
 										<h1 className="text-[21px] font-sans font-bold text-white uppercase tracking-tight flex items-center gap-1.5">
 											GYM Flix
 										</h1>
 									</div>
 									{workoutHistory && (
-										<div className="bg-neon-lime/10 text-neon-lime px-3 py-1 rounded-full text-[11px] font-sans font-bold flex items-center gap-1 border border-neon-lime/20">
-											<Flame className="w-4 h-4 text-neon-lime fill-neon-lime animate-pulse" />
+										<div className="bg-neon-lime/10 text-neon-lime px-3 py-1 rounded-full text-xs font-sans font-bold flex items-center gap-1 border border-neon-lime/20">
+											<Flame className="size-4 text-neon-lime fill-neon-lime animate-pulse" />
 											<span>{workoutHistory.length} treino(s) concluído(s)</span>
 										</div>
 									)}
@@ -274,7 +268,7 @@ export default function Dashboard() {
 									>
 										<Trophy className="w-8 h-8 mx-auto text-neon-lime" />
 										<h3 className="font-sans font-bold text-[16px] text-neon-lime">Treino completo!</h3>
-										<p className="text-[11px] text-zinc-300 font-sans leading-[150%]">
+										<p className="text-xs text-zinc-300 font-sans leading-[150%]">
 											Você deu o seu máximo no treino {activeWorkout.name}. Hidrate-se e descanse a musculatura.
 										</p>
 									</motion.div>
@@ -506,16 +500,14 @@ export default function Dashboard() {
 					</AnimatePresence>
 				</main>
 
-				{/* Persistent side navigation Drawer */}
 				<RightDrawer
 					isOpen={isDrawerOpen}
 					onClose={() => setIsDrawerOpen(false)}
 					activeScreen={activeScreen}
-					onNavigate={(screen) => setActiveScreen(screen)}
+					onNavigate={screen => setActiveScreen(screen)}
 					userName={user.name || ''}
 				/>
 
-				{/* Swipe screen detailed player (Modal is opened full screen) */}
 				{activeWorkout && activeExercise && (
 					<ExerciseModal
 						isOpen={isExercisePlayerOpen}
@@ -529,6 +521,7 @@ export default function Dashboard() {
 						onNext={handleNextExercise}
 						onPrev={handlePrevExercise}
 						onMarkCompleted={handleMarkCompleted}
+						isWorkoutComplete={activeWorkout.exercises.every(e => completeExercises.some(ce => ce === e.id))}
 					/>
 				)}
 

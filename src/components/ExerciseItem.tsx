@@ -46,8 +46,8 @@ export function ExerciseItem({
 						</div>
 
 						{/* Info */}
-						<div className="flex flex-col gap-2 min-w-0">
-							<h4 className="text-base font-sans font-bold text-neon-lime group-hover:text-[#a9ce16] transition-colors truncate">
+						<div className="flex flex-col gap-2">
+							<h4 className="text-base font-sans font-bold text-neon-lime group-hover:text-[#a9ce16] transition-colors">
 								{exercise.name}
 							</h4>
 							<div className="flex flex-col gap-2 mb-0.5">
