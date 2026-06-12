@@ -67,14 +67,12 @@ export function ExerciseItem({
 						</div>
 					</div>
 
-					{/* Play indicators */}
-					<div className="flex items-center gap-2 shrink-0">
+					<div className="flex items-center gap-2 shrink-0 mt-1 self-end">
 						{isCompleted && (
-							<span className="text-[10px] text-[#ccff00] font-sans font-semibold bg-[#ccff00]/10 px-2.5 py-1 rounded-full">
+							<span className="text-[10px] text-neon-lime font-sans font-semibold bg-neon-lime/10 px-2.5 py-1 rounded-full">
 								Concluído
 							</span>
 						)}
-						<ChevronRight className="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors" />
 					</div>
 				</div>
 			</div>

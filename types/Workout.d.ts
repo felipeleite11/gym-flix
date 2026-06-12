@@ -1,7 +1,8 @@
 type Workout = {
-  id: number;
-  name: string;
-  description: string;
-  exercises: Exercise[];
+  id: number
+  name: string
+  description: string
+  exercises: Exercise[]
   user: User
+  supervised: boolean
 }

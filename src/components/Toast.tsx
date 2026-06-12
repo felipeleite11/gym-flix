@@ -33,7 +33,7 @@ export function Toast({ message, isOpen, onClose }: ToastProps) {
           <div className="bg-white/20 p-1.5 rounded-full">
             <Check className="w-4 h-4 text-white" />
           </div>
-          <span className="text-[11px] font-sans leading-[150%] flex-1">{message}</span>
+          <span className="text-sm font-sans leading-[150%] flex-1">{message}</span>
         </motion.div>
       )}
     </AnimatePresence>
