@@ -18,6 +18,7 @@ import { ExerciseItem } from '../../components/ExerciseItem';
 import { ExerciseModal } from '../../components/ExerciseModal';
 import { Toast } from '../../components/Toast';
 import { useParams } from 'next/navigation';
+import { CircleParticles } from '@/components/CircleParticles';
 
 export default function Dashboard() {
 	const { username } = useParams()
@@ -187,48 +188,44 @@ export default function Dashboard() {
 
 									<div className="grid grid-cols-1 gap-4">
 										{user.workouts.map((wk: any) => {
-											const exerciseIds = wk.exercises.map((e: any) => e.id);
+											const exerciseIds = wk.exercises.map((e: any) => e.id)
 											const doneTodayCount = exerciseIds.filter((id: number) =>
 												completedExercises.includes(id)
-											).length;
+											).length
 
 											return (
 												<div key={wk.id} className="relative">
 													<button
 														id={`workout-card-btn-${wk.id}`}
 														onClick={() => handleSelectWorkout(wk.id)}
-														className="w-full text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all"
+														className="w-full h-44 text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all"
 													>
-														<div className="p-4 w-full">
-															<div className="flex items-center justify-between mb-2">
-																<span className="text-[10px] font-sans font-bold tracking-wide text-neon-lime bg-neon-lime/10 px-2 py-0.5 rounded-full inline-block border border-neon-lime/20">
-																	{wk.exercises.length} EXERCÍCIOS
-																</span>
-																{/* <span className="text-[11px] text-white/50 font-sans font-normal">
-																	{doneTodayCount}/{wk.exercises.length} feitos hoje
-																</span> */}
-															</div>
-															<h3 className="text-[18px] font-sans font-bold text-white leading-tight">
-																{wk.name}
-															</h3>
-															<p className="text-[11px] text-zinc-300 font-sans leading-[150%] mt-1 line-clamp-2">
-																{wk.description}
-															</p>
-
-															{/* {wk.exercises.length > 0 && (
-																<div className="mt-3 w-full bg-white/5 h-1.5 rounded-full overflow-hidden border border-white/5">
-																	<div
-																		className="h-full bg-[#ccff00] transition-all duration-500 shadow-[0_0_8px_#ccff00]"
-																		style={{ width: `${(doneTodayCount / wk.exercises.length) * 100}%` }}
-																	/>
-																</div>
-															)} */}
+														<div className="absolute inset-0 pointer-events-none">
+															<CircleParticles id={String(wk.id)} />
+															<div className="absolute inset-0 bg-black/30" />
 														</div>
-														<div className="px-4 py-2.5 bg-white/1 border-t border-white/5 flex items-center justify-between w-full">
-															<span className="text-[11px] font-sans font-medium text-neon-lime">Visualizar treino →</span>
-															{doneTodayCount === wk.exercises.length && wk.exercises.length > 0 ? (
-																<span className="text-[11px] font-sans font-bold text-neon-lime">✓ Concluído</span>
-															) : null}
+
+														<div className="relative z-10 flex flex-col justify-between h-full">
+															<div className="size-full p-4">
+																<div className="flex items-center justify-between mb-2">
+																	<span className="text-[10px] font-sans font-bold tracking-wide text-neon-lime bg-neon-lime/10 px-2 py-0.5 rounded-full inline-block border border-neon-lime/20">
+																		{wk.exercises.length} EXERCÍCIOS
+																	</span>
+																</div>
+																<h3 className="text-[18px] font-sans font-bold text-white leading-tight">
+																	{wk.name}
+																</h3>
+																<p className="text-[11px] text-zinc-300 font-sans leading-[150%] mt-1 line-clamp-2">
+																	{wk.description}
+																</p>
+															</div>
+
+															<div className="px-4 py-2.5 bg-white/1 border-t border-white/5 flex items-center justify-between w-full">
+																<span className="text-[11px] font-sans font-medium text-neon-lime">Visualizar treino →</span>
+																{doneTodayCount === wk.exercises.length && wk.exercises.length > 0 ? (
+																	<span className="text-[11px] font-sans font-bold text-neon-lime">✓ Concluído</span>
+																) : null}
+															</div>
 														</div>
 													</button>
 												</div>
