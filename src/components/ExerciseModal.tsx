@@ -190,18 +190,18 @@ export function ExerciseModal({
 						<div className="mt-6 pt-4 border-t border-white/5 shrink-0 bg-[#0a110e] -mx-4 -mb-3 px-4 pb-6 rounded-t-3xl shadow-lg">
 							{successTriggered || isCompleted ? (
 								<motion.div
-									initial={{ scale: 0.8, opacity: 0 }}
+									initial={{ scale: 0.5, opacity: 0 }}
 									animate={{ scale: 1, opacity: 1 }}
-									className="fixed inset-1/2 -translate-1/2 w-[90vw] h-30 bg-[#070d0a] flex flex-col items-center justify-center p-3 text-center text-[#ccff00] space-y-1 rounded-xl border-2 border-neon-lime/20"
+									className="fixed inset-1/2 -translate-1/2 w-[90vw] h-44 bg-[#070d0a] flex flex-col items-center justify-center p-3 text-center text-[#ccff00] space-y-1 rounded-xl border-2 border-neon-lime/20"
 								>
 									<motion.div
 										animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.1, 1] }}
 										transition={{ duration: 0.5 }}
 									>
-										<CheckCircle className="w-8 h-8 text-[#ccff00]" />
+										<CheckCircle className="size-12 text-neon-lime" />
 									</motion.div>
 									
-									<span className="text-base font-sans font-bold">{getRandomCongratulationSentence()}</span>
+									<span className="text-base font-sans font-bold mt-1">{getRandomCongratulationSentence()}</span>
 
 									<p className="text-xs font-sans text-white/70 leading-[150%] max-w-50">
 										{!isWorkoutComplete ? 'Vamos para o próximo exercício...' : 'Treino completo! Aguarde...'}
