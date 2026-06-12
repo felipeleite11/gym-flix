@@ -78,7 +78,6 @@ export function ExerciseModal({
 
 		if (hasNext) {
 			setTimeout(() => {
-				// onNext()
 				setSuccessTriggered(false)
 				onClose()
 			}, 1500)
@@ -95,7 +94,7 @@ export function ExerciseModal({
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					className="fixed inset-0 bg-brand-bg z-2000 flex flex-col h-full overflow-hidden select-none text-white"
+					className="fixed inset-0 bg-brand-bg z-2000 flex flex-col h-dvh overflow-hidden select-none text-white"
 				>
 					<div className="w-full bg-[#0a110e] flex items-center justify-between p-4 border-b border-white/5 shrink-0">
 						<button
