@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle, ArrowLeftIcon } from 'lucide-react';
 import YouTube from 'react-youtube';
+import { Button } from './ui/button';
 
 interface ExerciseModalProps {
 	exercise: Exercise;
 	isOpen: boolean;
 	onClose: () => void;
-	onMarkCompleted: (exerciseId: number) => void;
+	onMarkCompleted: (exercise: Exercise) => void;
 	isCompleted: boolean;
 	onNext: () => void;
 	onPrev: () => void;
@@ -58,23 +59,22 @@ export function ExerciseModal({
 	}
 
 	const handleDragEnd = (_: any, info: any) => {
-		const swipeThreshold = 50; // pixels
+		const swipeThreshold = 50 // pixels
+
 		if (info.offset.x < -swipeThreshold) {
-			// Swiped left -> NEXT
 			if (hasNext) {
-				onNext();
+				onNext()
 			}
 		} else if (info.offset.x > swipeThreshold) {
-			// Swiped right -> PREV
 			if (hasPrev) {
-				onPrev();
+				onPrev()
 			}
 		}
 	}
 
 	const handleComplete = () => {
 		setSuccessTriggered(true)
-		onMarkCompleted(exercise.id)
+		onMarkCompleted(exercise)
 
 		if (hasNext) {
 			setTimeout(() => {
@@ -90,7 +90,6 @@ export function ExerciseModal({
 		<AnimatePresence>
 			{isOpen && (
 				<motion.div
-					id="exercise-modal-overlay"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
@@ -116,7 +115,6 @@ export function ExerciseModal({
 						</div>
 
 						<button
-							id="exercise-modal-close-btn"
 							onClick={() => {
 								setSuccessTriggered(false)
 								onClose()
@@ -127,9 +125,7 @@ export function ExerciseModal({
 						</button>
 					</div>
 
-					{/* Interactive sliding container */}
 					<motion.div
-						id="exercise-swipe-area"
 						drag="x"
 						dragConstraints={{ left: 0, right: 0 }}
 						dragElastic={0.4}
@@ -192,7 +188,7 @@ export function ExerciseModal({
 								<motion.div
 									initial={{ scale: 0.5, opacity: 0 }}
 									animate={{ scale: 1, opacity: 1 }}
-									className="fixed inset-1/2 -translate-1/2 w-[90vw] h-44 bg-[#070d0a] flex flex-col items-center justify-center p-3 text-center text-[#ccff00] space-y-1 rounded-xl border-2 border-neon-lime/20"
+									className="fixed inset-1/2 -translate-1/2 w-[90vw] h-44 bg-brand-bg flex flex-col items-center justify-center p-3 text-center text-[#ccff00] space-y-1 rounded-xl border-2 border-neon-lime/20"
 								>
 									<motion.div
 										animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.1, 1] }}
@@ -208,14 +204,13 @@ export function ExerciseModal({
 									</p>
 								</motion.div>
 							) : (
-								<button
-									id="btn-mark-exercise-complete"
+								<Button
 									onClick={handleComplete}
-									className="w-full bg-[#000000] text-lime-500 text-[16px] font-sans font-bold py-2.5 px-4 rounded-[10px] border border-neon-lime/20 flex items-center justify-center gap-1.5 hover:bg-zinc-900 active:scale-[0.98] transition-all shadow-md cursor-pointer"
+									className="w-full bg-[#000000] text-lime-500 text-[16px] font-sans font-bold py-5 px-4 rounded-[10px] border border-neon-lime/20 flex items-center justify-center gap-1.5 hover:bg-zinc-950 hover:scale-[102%] active:scale-[0.98] transition-all shadow-md cursor-pointer"
 								>
 									<CheckCircle className="size-6 shrink-0" style={{ width: '24px', height: '24px' }} />
-									<span>Marcar como Concluído</span>
-								</button>
+									Marcar como concluído
+								</Button>
 							)}
 						</div>
 					</motion.div>

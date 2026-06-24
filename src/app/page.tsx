@@ -13,7 +13,7 @@ export default function Start() {
 	return (
 		<div className="min-h-screen bg-[#040806] flex flex-col antialiased">
 			<main className="justify-center w-full h-screen bg-brand-bg text-white px-4 py-5 flex flex-col">
-				<AnimatePresence mode="wait">
+				<AnimatePresence>
 					<motion.section
 						key="screen-explore"
 						initial={{ opacity: 0, y: 10 }}

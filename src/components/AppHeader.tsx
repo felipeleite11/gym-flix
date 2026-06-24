@@ -1,6 +1,7 @@
 'use client'
 
-import { Menu } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface AppHeaderProps {
   userName: string;
@@ -14,14 +15,15 @@ export function AppHeader({ userName, onOpenDrawer }: AppHeaderProps) {
         Olá, <strong className="font-semibold text-neon-lime">{userName}</strong>
       </span>
       
-      <button
-        id="menu-toggle-btn"
+      <Button
+        size="icon-lg"
+        variant="link"
         onClick={onOpenDrawer}
-        className="w-5.5 h-5.5 flex items-center justify-center p-0 text-white hover:text-neon-lime transition-colors active:scale-95"
+        className="size-5.5 hover:opacity-80 flex items-center justify-center p-0 text-white hover:text-neon-lime transition-colors active:scale-95"
         style={{ width: '22px', height: '22px' }}
       >
-        <Menu className="w-full h-full text-white stroke-2" />
-      </button>
+        <MenuIcon className="text-white stroke-2 size-6" />
+      </Button>
     </header>
   );
 };

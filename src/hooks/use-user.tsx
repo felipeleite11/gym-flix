@@ -6,7 +6,7 @@ interface UseUserProps {
 }
 
 export function useUser({ username }: UseUserProps) {
-	return useQuery({
+	return useQuery<User>({
 		queryKey: ['get-user'],
 		queryFn: async () => {
 			const user = await baserow.helpers.findUserByUsername(username)
