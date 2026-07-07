@@ -1,5 +1,6 @@
 'use client'
 
+import { Card } from '@/components/Card';
 import { CircleParticles } from '@/components/CircleParticles';
 import { useUser } from '@/hooks/use-user';
 import { baserow } from '@/lib/baserow';
@@ -9,6 +10,7 @@ import { ArrowRightIcon, Flame, UserIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Workouts() {
 	const { username } = useParams()
@@ -64,11 +66,11 @@ export default function Workouts() {
 				<div className="grid grid-cols-1 gap-4">
 					{user.workouts.map((wk: Workout) => {
 						return (
-							<div key={wk.id} className="relative">
+							<Card key={wk.id}>
 								<Link
 									href={`/${username}/treino/${wk.id}`}
 									className={cn(
-										'w-full h-44 text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 overflow-hidden cursor-pointer flex flex-col justify-between transition-all',
+										'w-full h-44 text-left bg-card-bg rounded-[20px] shadow-sm hover:shadow-md border border-white/5 hover:border-neon-lime/20 cursor-pointer flex flex-col justify-between transition-all',
 										{ 'h-32': wk.supervised }
 									)}
 								>
@@ -109,8 +111,10 @@ export default function Workouts() {
 										</div>
 									</div>
 								</Link>
-							</div>
-						);
+
+								<div className='light opacity-0 size-50 rounded-full absolute top-0 left-0 z-10 bg-[radial-gradient(50%_50%_at_50%_50%,#ffffff33_0%,rgba(104,134,255,0)_100%)]'></div>
+							</Card>								
+						)
 					})}
 				</div>
 			</div>

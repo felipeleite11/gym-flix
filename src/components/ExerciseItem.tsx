@@ -3,6 +3,7 @@
 import { CheckCircle2, ChevronRight } from 'lucide-react';
 import { Badge } from './Badge';
 import { CircleParticles } from './CircleParticles';
+import { Card } from './Card';
 
 interface ExerciseItemProps {
 	exercise: Exercise;
@@ -18,7 +19,7 @@ export function ExerciseItem({
 	index,
 }: ExerciseItemProps) {
 	return (
-		<div className="relative">
+		<Card>
 			<div
 				onClick={onSelect}
 				className={`p-4 bg-[#121815] rounded-xl border transition-all duration-200 cursor-pointer gap-2 flex items-center justify-between group active:scale-[0.99] ${isCompleted
@@ -76,6 +77,6 @@ export function ExerciseItem({
 					</div>
 				</div>
 			</div>
-		</div>
+		</Card>
 	)
 }
